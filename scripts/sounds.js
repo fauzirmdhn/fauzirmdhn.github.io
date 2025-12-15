@@ -13,7 +13,7 @@ const SOUNDS = (function () {
     if (sounds.blow) sounds.blow.volume = 0.9;
     if (sounds.celebrate) sounds.celebrate.volume = 0.85;
     if (sounds.photo) sounds.photo.volume = 0.8;
-    if (sounds.drag) sounds.drag.volume = 0.7;
+    if (sounds.drag) sounds.drag.volume = 0.4;
     if (sounds.drop) sounds.drop.volume = 0.17;
 
     function playOneShot(src, vol = 1) {
