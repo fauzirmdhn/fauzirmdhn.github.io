@@ -1,8 +1,8 @@
 const catImages = {
-    idle: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Number_1_in_green_rounded_square.svg/2048px-Number_1_in_green_rounded_square.svg.png',
-    falling: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Number_2_in_light_blue_rounded_square.svg/1024px-Number_2_in_light_blue_rounded_square.svg.png',
-    walking: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShzcig9q7uPR8rcb_IchTVPqS5JqGzzEojQw&s',
-    dragging: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Number_4_in_yellow_rounded_square.svg/2048px-Number_4_in_yellow_rounded_square.svg.png'
+    idle: 'assets/cats/idle.png',
+    falling: 'assets/cats/fall.png',
+    walking: 'assets/cats/walk.png',
+    dragging: 'assets/cats/drag.png'
 };
 
 const cats = [];
@@ -77,6 +77,7 @@ function startDrag(e, catData) {
     const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
     const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
 
+    try { SOUNDS.play('drag'); } catch (e) { }
     catData.dragOffsetX = clientX - catData.x;
     catData.dragOffsetY = clientY - catData.y;
 
@@ -105,8 +106,6 @@ function moveDrag(e, catData) {
 function endDrag(catData, moveHandler, upHandler) {
     catData.isDragging = false;
     catData.element.classList.remove('dragging');
-
-    try { SOUNDS.play('drop'); } catch (e) { }
 
     document.removeEventListener('mousemove', moveHandler);
     document.removeEventListener('touchmove', moveHandler);
@@ -140,6 +139,8 @@ function updateCats() {
                 catData.state = 'idle';
                 catData.img.src = catImages.idle;
 
+                try { SOUNDS.play('drop'); } catch (e) { }
+
                 setTimeout(() => {
                     if (catData.state === 'idle') {
                         catData.state = 'walking';
@@ -154,7 +155,6 @@ function updateCats() {
         } else if (catData.state === 'walking') {
             catData.x += catData.walkSpeed * catData.walkDirection;
 
-            // small chance for a random meow per cat
             if (Math.random() < 0.001) {
                 try { SOUNDS.playRandomMeow(0.5); } catch (e) { }
             }

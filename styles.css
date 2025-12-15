@@ -170,7 +170,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(165deg, #99a480 0%, #f05053 100%);
     overflow: hidden;
 }
 
@@ -301,10 +301,8 @@ body {
     display: none;
 }
 
-/* Responsive adjustments */
 @media (max-width: 480px) {
 
-    /* Phone: smaller photo and text */
     #photo {
         width: 180px;
         height: 180px;
@@ -322,7 +320,6 @@ body {
         margin-top: 6px;
     }
 
-    /* Scale cake down to fit mobile view */
     #cake-container {
         transform: scale(0.75);
         transform-origin: center center;
@@ -338,7 +335,6 @@ body {
         height: 70px;
     }
 
-    /* Keep stage centered on small screens */
     #stage {
         align-items: center;
         padding-top: 0;
@@ -347,7 +343,6 @@ body {
 
 @media (min-width: 481px) and (max-width: 1024px) {
 
-    /* Tablet: slightly smaller than desktop */
     #photo {
         width: 240px;
         height: 240px;

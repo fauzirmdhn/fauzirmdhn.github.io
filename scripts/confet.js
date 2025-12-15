@@ -17,6 +17,7 @@ cakeContainer.addEventListener('click', () => {
             cakeContainer.classList.add('hidden');
             setTimeout(() => {
                 celebration.classList.add('active');
+                try { SOUNDS.play('celebrate'); } catch (e) { }
                 createConfetti();
                 spawnCats();
             }, 500);
