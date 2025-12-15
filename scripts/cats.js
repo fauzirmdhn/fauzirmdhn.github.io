@@ -72,6 +72,7 @@ function startDrag(e, catData) {
     catData.state = 'dragging';
     catData.img.src = catImages.dragging;
     catData.element.classList.add('dragging');
+    try { SOUNDS.play('drag'); } catch (e) { }
 
     const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
     const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
@@ -104,6 +105,8 @@ function moveDrag(e, catData) {
 function endDrag(catData, moveHandler, upHandler) {
     catData.isDragging = false;
     catData.element.classList.remove('dragging');
+
+    try { SOUNDS.play('drop'); } catch (e) { }
 
     document.removeEventListener('mousemove', moveHandler);
     document.removeEventListener('touchmove', moveHandler);
@@ -150,6 +153,11 @@ function updateCats() {
 
         } else if (catData.state === 'walking') {
             catData.x += catData.walkSpeed * catData.walkDirection;
+
+            // small chance for a random meow per cat
+            if (Math.random() < 0.001) {
+                try { SOUNDS.playRandomMeow(0.5); } catch (e) { }
+            }
 
             const catWidth = catData.element.offsetWidth || 60;
             if (catData.x <= 0) {

@@ -12,12 +12,12 @@ body {
 
 @font-face {
     font-family: 'HeaderFont';
-    src: url('assets/FontFamily/Lingkawi-South-Free-Font/Lingkawi\ South\ Free\ Font/Lingkawi\ South.otf') format('opentype');
+    src: url('assets/FontFamily/Lingkawi\ South.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'TextFont';
-    src: url('assets/FontFamily/Stardom_Complete/Fonts/OTF/Stardom-Regular.otf') format('opentype');
+    src: url('assets/FontFamily/Stardom-Regular.woff2') format('woff2');
 }
 
 #stage {
@@ -325,7 +325,7 @@ body {
     /* Scale cake down to fit mobile view */
     #cake-container {
         transform: scale(0.75);
-        transform-origin: center top;
+        transform-origin: center center;
     }
 
     .confetti {
@@ -338,10 +338,10 @@ body {
         height: 70px;
     }
 
-    /* Give a little top spacing so content isn't flush to the edge */
+    /* Keep stage centered on small screens */
     #stage {
-        align-items: flex-start;
-        padding-top: 18px;
+        align-items: center;
+        padding-top: 0;
     }
 }
 

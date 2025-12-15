@@ -5,6 +5,7 @@ const stage = document.getElementById('stage');
 const celebration = document.getElementById('celebration');
 
 cakeContainer.addEventListener('click', () => {
+    try { SOUNDS.play('blow'); } catch (e) { }
     flame.classList.add('out');
 
     setTimeout(() => {
@@ -45,6 +46,7 @@ function createConfetti() {
 }
 
 function spewConfettiFromImage() {
+    try { SOUNDS.play('photo'); } catch (e) { }
     const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
     const photo = document.getElementById('photo');
     const photoBtn = document.getElementById('photo-btn');
