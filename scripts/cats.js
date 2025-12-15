@@ -17,11 +17,16 @@ function spawnCats() {
     const celebration = document.getElementById('celebration');
     if (!celebration.classList.contains('active')) return;
 
-    let numCats = randomRange(5, 9);
+    const w = window.innerWidth;
+    let numCats;
+    if (w <= 480) {
+        numCats = randomRange(2, 4);
+    } else {
+        numCats = randomRange(5, 9);
+    }
+
     for (let i = 0; i < numCats; i++) {
-        setTimeout(() => {
-            createCat();
-        }, i * 1000);
+        setTimeout(() => createCat(), i * 600);
     }
 }
 
@@ -33,11 +38,13 @@ function createCat() {
     img.src = catImages.falling;
     cat.appendChild(img);
 
-    const startX = Math.random() * (window.innerWidth - 60);
+    const celebrationEl = document.getElementById('celebration');
+    celebrationEl.appendChild(cat);
+
+    const catWidth = cat.offsetWidth || 60;
+    const startX = Math.random() * Math.max(0, window.innerWidth - catWidth);
     cat.style.left = startX + 'px';
     cat.style.top = '-60px';
-
-    document.getElementById('celebration').appendChild(cat);
 
     const catData = {
         element: cat,
@@ -140,12 +147,19 @@ function updateCats() {
 
             catData.element.style.top = catData.y + 'px';
 
+
         } else if (catData.state === 'walking') {
             catData.x += catData.walkSpeed * catData.walkDirection;
 
-            if (catData.x <= 0 || catData.x >= window.innerWidth - 60) {
-                catData.walkDirection *= -1;
-                catData.element.style.transform = `scaleX(${catData.walkDirection})`;
+            const catWidth = catData.element.offsetWidth || 60;
+            if (catData.x <= 0) {
+                catData.x = 0;
+                catData.walkDirection = 1;
+                catData.element.style.transform = `scaleX(1)`;
+            } else if (catData.x >= window.innerWidth - catWidth) {
+                catData.x = window.innerWidth - catWidth;
+                catData.walkDirection = -1;
+                catData.element.style.transform = `scaleX(-1)`;
             }
 
             if (Math.random() < 0.01) {
